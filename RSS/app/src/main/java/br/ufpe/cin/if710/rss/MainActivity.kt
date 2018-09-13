@@ -6,10 +6,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.jsoup.Jsoup
+import java.io.InputStream
+import java.net.URL
+import java.nio.charset.StandardCharsets
 
 class MainActivity : Activity() {
-    //private val RSS_FEED = "http://leopoldomt.com/if1001/g1brasil.xml"
-    private val RSS_FEED = "http://cin.ufpe.br/~lfvg/"
+    private val RSS_FEED = "http://leopoldomt.com/if1001/g1brasil.xml"
+    //private val RSS_FEED = "http://cin.ufpe.br/~lfvg/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +38,21 @@ class MainActivity : Activity() {
     //PORTAR ESSA PARTE
     //PORTAR ESSA PARTE
     private fun getRSSFeed(url: String): String{
-        var doc = Jsoup.connect(RSS_FEED).get()
-        return doc.html()
+        //var a:InputStream = URL(RSS_FEED).openStream()
+        //var doc =  Jsoup.connect(RSS_FEED).get()
+        var doc = Jsoup.connect(RSS_FEED).get().text().replace("\u00a0", " ").replace("\u003e", "")!!
+
+
+
+        //var a = doc?.html()
+        var lista = ParserRSS.parserSimples(doc)
+        var temp = lista?.listIterator()
+      //  var test = temp.next().toString()
+       // while(temp.hasNext()){
+        //    val t:ItemRSS = temp.next()
+       // }
+
+
+        return /*doc.html()*/ temp?.next()!!
     }
 }
