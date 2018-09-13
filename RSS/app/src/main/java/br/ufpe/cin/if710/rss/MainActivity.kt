@@ -11,7 +11,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 class MainActivity : Activity() {
-    private val RSS_FEED = "http://rss.cnn.com/rss/edition.rss"
+    private val RSS_FEED = "http://leopoldomt.com/if1001/g1brasil.xml"
     //private val RSS_FEED = "http://cin.ufpe.br/~lfvg/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,8 +40,8 @@ class MainActivity : Activity() {
     private fun getRSSFeed(url: String): String{
         //var a:InputStream = URL(RSS_FEED).openStream()
         //var doc =  Jsoup.connect(RSS_FEED).get()
-        var doc = Jsoup.connect(RSS_FEED).get().text().replace("\u00a0", " ").replace("\u003e", ">")!!
-
+        //var doc = Jsoup.connect(RSS_FEED).get().text().replace("\u00a0", " ").replace("\u003e", ">")!!
+        var doc = Teste().getRssFeed(RSS_FEED)!!
 
 
         //var a = doc?.html()
@@ -53,6 +53,6 @@ class MainActivity : Activity() {
        // }
 
 
-        return /*doc.html()*/ temp?.next()!!.toString()
+        return doc// temp?.next()!!.toString()
     }
 }

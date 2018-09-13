@@ -45,7 +45,7 @@ public class MainActivityAntigo extends Activity {
     }
 
     //Opcional - pesquise outros meios de obter arquivos da internet - bibliotecas, etc.
-    private String getRssFeed(String feed) throws IOException {
+    public String getRssFeed(String feed) throws IOException {
         InputStream in = null;
         String rssFeed = "";
         try {
