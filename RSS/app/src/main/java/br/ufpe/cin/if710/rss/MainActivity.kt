@@ -11,7 +11,7 @@ import java.net.URL
 import java.nio.charset.StandardCharsets
 
 class MainActivity : Activity() {
-    private val RSS_FEED = "http://leopoldomt.com/if1001/g1brasil.xml"
+    private val RSS_FEED = R.string.rssfeed
     //private val RSS_FEED = "http://cin.ufpe.br/~lfvg/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,8 @@ class MainActivity : Activity() {
             doAsync{
                 var feedXML = getRSSFeed(RSS_FEED)
                 uiThread{
-                    conteudoRSS.setText(feedXML)
+                    //MUDAR ISSO PRA PREENCHER O LIST
+                    // /conteudoRSS.setText(feedXML)
                 }
             }
         }
@@ -37,7 +38,7 @@ class MainActivity : Activity() {
     //PORTAR ESSA PARTE
     //PORTAR ESSA PARTE
     //PORTAR ESSA PARTE
-    private fun getRSSFeed(url: String): String{
+    private fun getRSSFeed(url: String): List<ItemRSS>{
         //var a:InputStream = URL(RSS_FEED).openStream()
         //var doc =  Jsoup.connect(RSS_FEED).get()
         //var doc = Jsoup.connect(RSS_FEED).get().text().replace("\u00a0", " ").replace("\u003e", ">")!!
@@ -53,6 +54,6 @@ class MainActivity : Activity() {
        // }
 
 
-        return doc// temp?.next()!!.toString()
+        return lista// temp?.next()!!.toString()
     }
 }
