@@ -2,36 +2,47 @@ package br.ufpe.cin.if710.rss
 
 import android.app.Activity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import org.jsoup.Jsoup
-import java.io.InputStream
-import java.net.URL
-import java.nio.charset.StandardCharsets
 
 class MainActivity : Activity() {
-    private val RSS_FEED = R.string.rssfeed
+    private val RSS_FEED: String = "http://leopoldomt.com/if1001/g1brasil.xml"
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
     //private val RSS_FEED = "http://cin.ufpe.br/~lfvg/"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewManager = LinearLayoutManager(this)
+
     }
 
     override fun onStart() {
         super.onStart()
-        try{
+        try {
             //o codigo assincrono vai aqui
-            doAsync{
+            doAsync {
                 var feedXML = getRSSFeed(RSS_FEED)
-                uiThread{
-                    //MUDAR ISSO PRA PREENCHER O LIST
-                    // /conteudoRSS.setText(feedXML)
+                uiThread {
+                    viewAdapter = RSSAdapter(feedXML)
+                    recyclerView = findViewById<RecyclerView>(R.id.conteudoRSS).apply {
+
+                        setHasFixedSize(true)
+
+
+                        layoutManager = viewManager
+
+
+                        adapter = viewAdapter
+                    }
                 }
             }
-        }
-        catch (e: Exception){
+        }catch (e: Exception){
             e.printStackTrace()
         }
     }
@@ -42,7 +53,7 @@ class MainActivity : Activity() {
         //var a:InputStream = URL(RSS_FEED).openStream()
         //var doc =  Jsoup.connect(RSS_FEED).get()
         //var doc = Jsoup.connect(RSS_FEED).get().text().replace("\u00a0", " ").replace("\u003e", ">")!!
-        var doc = Teste().getRssFeed(RSS_FEED)!!
+        var doc = GetPage().getRssFeed(url)!!
 
 
         //var a = doc?.html()

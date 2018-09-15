@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Teste {
+public class GetPage {
     public String getRssFeed(String feed) throws IOException {
         InputStream in = null;
         String rssFeed = "";
