@@ -8,7 +8,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class MainActivity : Activity() {
-    private val RSS_FEED: String = "http://leopoldomt.com/if1001/g1brasil.xml"
+    private var RSS_FEED = ""
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -18,6 +18,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        RSS_FEED = getString(R.string.rssfeed)
         viewManager = LinearLayoutManager(this)
 
     }
